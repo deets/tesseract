@@ -19,6 +19,8 @@
 #ifndef _TESS_CALLBACK_SPECIALIZATIONS_H
 #define _TESS_CALLBACK_SPECIALIZATIONS_H
 
+#include <type_traits>
+
 #include "host.h"  // For NULL.
 
 struct TessCallbackUtils_ {
@@ -273,9 +275,9 @@ NewPermanentTessCallback(R (*function)()) {
 
 
 // Specified by TR1 [4.7.2] Reference modifications.
-template <class T> struct remove_reference;
-template<typename T> struct remove_reference { typedef T type; };
-template<typename T> struct remove_reference<T&> { typedef T type; };
+//template <class T> struct remove_reference;
+//template<typename T> struct remove_reference { typedef T type; };
+//template<typename T> struct remove_reference<T&> { typedef T type; };
 
 // Identity<T>::type is a typedef of T. Useful for preventing the
 // compiler from inferring the type of an argument in templates.
@@ -293,7 +295,7 @@ class _ConstTessMemberResultCallback_1_0 : public TessResultCallback<R> {
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _ConstTessMemberResultCallback_1_0(const T* object, MemberSignature member, P1 p1)
@@ -323,7 +325,7 @@ class _ConstTessMemberResultCallback_1_0<del, void, T, P1> : public TessClosure 
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _ConstTessMemberResultCallback_1_0(const T* object, MemberSignature member, P1 p1)
@@ -367,7 +369,7 @@ class _TessMemberResultCallback_1_0 : public TessResultCallback<R> {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _TessMemberResultCallback_1_0( T* object, MemberSignature member, P1 p1)
@@ -397,7 +399,7 @@ class _TessMemberResultCallback_1_0<del, void, T, P1> : public TessClosure {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _TessMemberResultCallback_1_0( T* object, MemberSignature member, P1 p1)
@@ -440,7 +442,7 @@ class _TessFunctionResultCallback_1_0 : public TessResultCallback<R> {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _TessFunctionResultCallback_1_0(FunctionSignature function, P1 p1)
@@ -468,7 +470,7 @@ class _TessFunctionResultCallback_1_0<del, void, P1> : public TessClosure {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _TessFunctionResultCallback_1_0(FunctionSignature function, P1 p1)
@@ -507,8 +509,8 @@ class _ConstTessMemberResultCallback_2_0 : public TessResultCallback<R> {
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _ConstTessMemberResultCallback_2_0(const T* object, MemberSignature member, P1 p1, P2 p2)
@@ -538,8 +540,8 @@ class _ConstTessMemberResultCallback_2_0<del, void, T, P1, P2> : public TessClos
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _ConstTessMemberResultCallback_2_0(const T* object, MemberSignature member, P1 p1, P2 p2)
@@ -584,8 +586,8 @@ class _TessMemberResultCallback_2_0 : public TessResultCallback<R> {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _TessMemberResultCallback_2_0( T* object, MemberSignature member, P1 p1, P2 p2)
@@ -615,8 +617,8 @@ class _TessMemberResultCallback_2_0<del, void, T, P1, P2> : public TessClosure {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _TessMemberResultCallback_2_0( T* object, MemberSignature member, P1 p1, P2 p2)
@@ -660,8 +662,8 @@ class _TessFunctionResultCallback_2_0 : public TessResultCallback<R> {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _TessFunctionResultCallback_2_0(FunctionSignature function, P1 p1, P2 p2)
@@ -689,8 +691,8 @@ class _TessFunctionResultCallback_2_0<del, void, P1, P2> : public TessClosure {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _TessFunctionResultCallback_2_0(FunctionSignature function, P1 p1, P2 p2)
@@ -730,9 +732,9 @@ class _ConstTessMemberResultCallback_3_0 : public TessResultCallback<R> {
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _ConstTessMemberResultCallback_3_0(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3)
@@ -763,9 +765,9 @@ class _ConstTessMemberResultCallback_3_0<del, void, T, P1, P2, P3> : public Tess
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _ConstTessMemberResultCallback_3_0(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3)
@@ -809,9 +811,9 @@ class _TessMemberResultCallback_3_0 : public TessResultCallback<R> {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _TessMemberResultCallback_3_0( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3)
@@ -841,9 +843,9 @@ class _TessMemberResultCallback_3_0<del, void, T, P1, P2, P3> : public TessClosu
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _TessMemberResultCallback_3_0( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3)
@@ -886,9 +888,9 @@ class _TessFunctionResultCallback_3_0 : public TessResultCallback<R> {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _TessFunctionResultCallback_3_0(FunctionSignature function, P1 p1, P2 p2, P3 p3)
@@ -916,9 +918,9 @@ class _TessFunctionResultCallback_3_0<del, void, P1, P2, P3> : public TessClosur
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _TessFunctionResultCallback_3_0(FunctionSignature function, P1 p1, P2 p2, P3 p3)
@@ -957,10 +959,10 @@ class _ConstTessMemberResultCallback_4_0 : public TessResultCallback<R> {
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _ConstTessMemberResultCallback_4_0(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -990,10 +992,10 @@ class _ConstTessMemberResultCallback_4_0<del, void, T, P1, P2, P3, P4> : public 
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _ConstTessMemberResultCallback_4_0(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -1037,10 +1039,10 @@ class _TessMemberResultCallback_4_0 : public TessResultCallback<R> {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _TessMemberResultCallback_4_0( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -1070,10 +1072,10 @@ class _TessMemberResultCallback_4_0<del, void, T, P1, P2, P3, P4> : public TessC
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _TessMemberResultCallback_4_0( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -1116,10 +1118,10 @@ class _TessFunctionResultCallback_4_0 : public TessResultCallback<R> {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _TessFunctionResultCallback_4_0(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -1147,10 +1149,10 @@ class _TessFunctionResultCallback_4_0<del, void, P1, P2, P3, P4> : public TessCl
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _TessFunctionResultCallback_4_0(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -1189,11 +1191,11 @@ class _ConstTessMemberResultCallback_5_0 : public TessResultCallback<R> {
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _ConstTessMemberResultCallback_5_0(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -1223,11 +1225,11 @@ class _ConstTessMemberResultCallback_5_0<del, void, T, P1, P2, P3, P4, P5> : pub
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _ConstTessMemberResultCallback_5_0(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -1271,11 +1273,11 @@ class _TessMemberResultCallback_5_0 : public TessResultCallback<R> {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _TessMemberResultCallback_5_0( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -1305,11 +1307,11 @@ class _TessMemberResultCallback_5_0<del, void, T, P1, P2, P3, P4, P5> : public T
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _TessMemberResultCallback_5_0( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -1352,11 +1354,11 @@ class _TessFunctionResultCallback_5_0 : public TessResultCallback<R> {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _TessFunctionResultCallback_5_0(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -1384,11 +1386,11 @@ class _TessFunctionResultCallback_5_0<del, void, P1, P2, P3, P4, P5> : public Te
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _TessFunctionResultCallback_5_0(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -1427,12 +1429,12 @@ class _ConstTessMemberResultCallback_6_0 : public TessResultCallback<R> {
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _ConstTessMemberResultCallback_6_0(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -1462,12 +1464,12 @@ class _ConstTessMemberResultCallback_6_0<del, void, T, P1, P2, P3, P4, P5, P6> :
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _ConstTessMemberResultCallback_6_0(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -1511,12 +1513,12 @@ class _TessMemberResultCallback_6_0 : public TessResultCallback<R> {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _TessMemberResultCallback_6_0( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -1546,12 +1548,12 @@ class _TessMemberResultCallback_6_0<del, void, T, P1, P2, P3, P4, P5, P6> : publ
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _TessMemberResultCallback_6_0( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -1594,12 +1596,12 @@ class _TessFunctionResultCallback_6_0 : public TessResultCallback<R> {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _TessFunctionResultCallback_6_0(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -1627,12 +1629,12 @@ class _TessFunctionResultCallback_6_0<del, void, P1, P2, P3, P4, P5, P6> : publi
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _TessFunctionResultCallback_6_0(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -1959,7 +1961,7 @@ class _ConstTessMemberResultCallback_1_1 : public TessResultCallback1<R,A1> {
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _ConstTessMemberResultCallback_1_1(const T* object, MemberSignature member, P1 p1)
@@ -1989,7 +1991,7 @@ class _ConstTessMemberResultCallback_1_1<del, void, T, P1, A1> : public TessCall
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _ConstTessMemberResultCallback_1_1(const T* object, MemberSignature member, P1 p1)
@@ -2033,7 +2035,7 @@ class _TessMemberResultCallback_1_1 : public TessResultCallback1<R,A1> {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _TessMemberResultCallback_1_1( T* object, MemberSignature member, P1 p1)
@@ -2063,7 +2065,7 @@ class _TessMemberResultCallback_1_1<del, void, T, P1, A1> : public TessCallback1
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _TessMemberResultCallback_1_1( T* object, MemberSignature member, P1 p1)
@@ -2106,7 +2108,7 @@ class _TessFunctionResultCallback_1_1 : public TessResultCallback1<R,A1> {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _TessFunctionResultCallback_1_1(FunctionSignature function, P1 p1)
@@ -2134,7 +2136,7 @@ class _TessFunctionResultCallback_1_1<del, void, P1, A1> : public TessCallback1<
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _TessFunctionResultCallback_1_1(FunctionSignature function, P1 p1)
@@ -2173,8 +2175,8 @@ class _ConstTessMemberResultCallback_2_1 : public TessResultCallback1<R,A1> {
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _ConstTessMemberResultCallback_2_1(const T* object, MemberSignature member, P1 p1, P2 p2)
@@ -2204,8 +2206,8 @@ class _ConstTessMemberResultCallback_2_1<del, void, T, P1, P2, A1> : public Tess
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _ConstTessMemberResultCallback_2_1(const T* object, MemberSignature member, P1 p1, P2 p2)
@@ -2249,8 +2251,8 @@ class _TessMemberResultCallback_2_1 : public TessResultCallback1<R,A1> {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _TessMemberResultCallback_2_1( T* object, MemberSignature member, P1 p1, P2 p2)
@@ -2280,8 +2282,8 @@ class _TessMemberResultCallback_2_1<del, void, T, P1, P2, A1> : public TessCallb
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _TessMemberResultCallback_2_1( T* object, MemberSignature member, P1 p1, P2 p2)
@@ -2324,8 +2326,8 @@ class _TessFunctionResultCallback_2_1 : public TessResultCallback1<R,A1> {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _TessFunctionResultCallback_2_1(FunctionSignature function, P1 p1, P2 p2)
@@ -2353,8 +2355,8 @@ class _TessFunctionResultCallback_2_1<del, void, P1, P2, A1> : public TessCallba
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _TessFunctionResultCallback_2_1(FunctionSignature function, P1 p1, P2 p2)
@@ -2393,9 +2395,9 @@ class _ConstTessMemberResultCallback_3_1 : public TessResultCallback1<R,A1> {
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _ConstTessMemberResultCallback_3_1(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3)
@@ -2425,9 +2427,9 @@ class _ConstTessMemberResultCallback_3_1<del, void, T, P1, P2, P3, A1> : public 
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _ConstTessMemberResultCallback_3_1(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3)
@@ -2471,9 +2473,9 @@ class _TessMemberResultCallback_3_1 : public TessResultCallback1<R,A1> {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _TessMemberResultCallback_3_1( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3)
@@ -2503,9 +2505,9 @@ class _TessMemberResultCallback_3_1<del, void, T, P1, P2, P3, A1> : public TessC
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _TessMemberResultCallback_3_1( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3)
@@ -2548,9 +2550,9 @@ class _TessFunctionResultCallback_3_1 : public TessResultCallback1<R,A1> {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _TessFunctionResultCallback_3_1(FunctionSignature function, P1 p1, P2 p2, P3 p3)
@@ -2578,9 +2580,9 @@ class _TessFunctionResultCallback_3_1<del, void, P1, P2, P3, A1> : public TessCa
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _TessFunctionResultCallback_3_1(FunctionSignature function, P1 p1, P2 p2, P3 p3)
@@ -2619,10 +2621,10 @@ class _ConstTessMemberResultCallback_4_1 : public TessResultCallback1<R,A1> {
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _ConstTessMemberResultCallback_4_1(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -2652,10 +2654,10 @@ class _ConstTessMemberResultCallback_4_1<del, void, T, P1, P2, P3, P4, A1> : pub
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _ConstTessMemberResultCallback_4_1(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -2699,10 +2701,10 @@ class _TessMemberResultCallback_4_1 : public TessResultCallback1<R,A1> {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _TessMemberResultCallback_4_1( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -2732,10 +2734,10 @@ class _TessMemberResultCallback_4_1<del, void, T, P1, P2, P3, P4, A1> : public T
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _TessMemberResultCallback_4_1( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -2778,10 +2780,10 @@ class _TessFunctionResultCallback_4_1 : public TessResultCallback1<R,A1> {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _TessFunctionResultCallback_4_1(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -2809,10 +2811,10 @@ class _TessFunctionResultCallback_4_1<del, void, P1, P2, P3, P4, A1> : public Te
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _TessFunctionResultCallback_4_1(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -2851,11 +2853,11 @@ class _ConstTessMemberResultCallback_5_1 : public TessResultCallback1<R,A1> {
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _ConstTessMemberResultCallback_5_1(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -2885,11 +2887,11 @@ class _ConstTessMemberResultCallback_5_1<del, void, T, P1, P2, P3, P4, P5, A1> :
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _ConstTessMemberResultCallback_5_1(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -2933,11 +2935,11 @@ class _TessMemberResultCallback_5_1 : public TessResultCallback1<R,A1> {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _TessMemberResultCallback_5_1( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -2967,11 +2969,11 @@ class _TessMemberResultCallback_5_1<del, void, T, P1, P2, P3, P4, P5, A1> : publ
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _TessMemberResultCallback_5_1( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -3014,11 +3016,11 @@ class _TessFunctionResultCallback_5_1 : public TessResultCallback1<R,A1> {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _TessFunctionResultCallback_5_1(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -3046,11 +3048,11 @@ class _TessFunctionResultCallback_5_1<del, void, P1, P2, P3, P4, P5, A1> : publi
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _TessFunctionResultCallback_5_1(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -3089,12 +3091,12 @@ class _ConstTessMemberResultCallback_6_1 : public TessResultCallback1<R,A1> {
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _ConstTessMemberResultCallback_6_1(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -3124,12 +3126,12 @@ class _ConstTessMemberResultCallback_6_1<del, void, T, P1, P2, P3, P4, P5, P6, A
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _ConstTessMemberResultCallback_6_1(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -3173,12 +3175,12 @@ class _TessMemberResultCallback_6_1 : public TessResultCallback1<R,A1> {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _TessMemberResultCallback_6_1( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -3208,12 +3210,12 @@ class _TessMemberResultCallback_6_1<del, void, T, P1, P2, P3, P4, P5, P6, A1> : 
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _TessMemberResultCallback_6_1( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -3256,12 +3258,12 @@ class _TessFunctionResultCallback_6_1 : public TessResultCallback1<R,A1> {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _TessFunctionResultCallback_6_1(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -3289,12 +3291,12 @@ class _TessFunctionResultCallback_6_1<del, void, P1, P2, P3, P4, P5, P6, A1> : p
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _TessFunctionResultCallback_6_1(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -3564,7 +3566,7 @@ class _ConstTessMemberResultCallback_1_2 : public TessResultCallback2<R,A1,A2> {
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _ConstTessMemberResultCallback_1_2(const T* object, MemberSignature member, P1 p1)
@@ -3594,7 +3596,7 @@ class _ConstTessMemberResultCallback_1_2<del, void, T, P1, A1, A2> : public Tess
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _ConstTessMemberResultCallback_1_2(const T* object, MemberSignature member, P1 p1)
@@ -3638,7 +3640,7 @@ class _TessMemberResultCallback_1_2 : public TessResultCallback2<R,A1,A2> {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _TessMemberResultCallback_1_2( T* object, MemberSignature member, P1 p1)
@@ -3668,7 +3670,7 @@ class _TessMemberResultCallback_1_2<del, void, T, P1, A1, A2> : public TessCallb
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _TessMemberResultCallback_1_2( T* object, MemberSignature member, P1 p1)
@@ -3711,7 +3713,7 @@ class _TessFunctionResultCallback_1_2 : public TessResultCallback2<R,A1,A2> {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _TessFunctionResultCallback_1_2(FunctionSignature function, P1 p1)
@@ -3739,7 +3741,7 @@ class _TessFunctionResultCallback_1_2<del, void, P1, A1, A2> : public TessCallba
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _TessFunctionResultCallback_1_2(FunctionSignature function, P1 p1)
@@ -3778,8 +3780,8 @@ class _ConstTessMemberResultCallback_2_2 : public TessResultCallback2<R,A1,A2> {
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _ConstTessMemberResultCallback_2_2(const T* object, MemberSignature member, P1 p1, P2 p2)
@@ -3809,8 +3811,8 @@ class _ConstTessMemberResultCallback_2_2<del, void, T, P1, P2, A1, A2> : public 
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _ConstTessMemberResultCallback_2_2(const T* object, MemberSignature member, P1 p1, P2 p2)
@@ -3854,8 +3856,8 @@ class _TessMemberResultCallback_2_2 : public TessResultCallback2<R,A1,A2> {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _TessMemberResultCallback_2_2( T* object, MemberSignature member, P1 p1, P2 p2)
@@ -3885,8 +3887,8 @@ class _TessMemberResultCallback_2_2<del, void, T, P1, P2, A1, A2> : public TessC
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _TessMemberResultCallback_2_2( T* object, MemberSignature member, P1 p1, P2 p2)
@@ -3929,8 +3931,8 @@ class _TessFunctionResultCallback_2_2 : public TessResultCallback2<R,A1,A2> {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _TessFunctionResultCallback_2_2(FunctionSignature function, P1 p1, P2 p2)
@@ -3958,8 +3960,8 @@ class _TessFunctionResultCallback_2_2<del, void, P1, P2, A1, A2> : public TessCa
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _TessFunctionResultCallback_2_2(FunctionSignature function, P1 p1, P2 p2)
@@ -3998,9 +4000,9 @@ class _ConstTessMemberResultCallback_3_2 : public TessResultCallback2<R,A1,A2> {
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _ConstTessMemberResultCallback_3_2(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3)
@@ -4030,9 +4032,9 @@ class _ConstTessMemberResultCallback_3_2<del, void, T, P1, P2, P3, A1, A2> : pub
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _ConstTessMemberResultCallback_3_2(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3)
@@ -4076,9 +4078,9 @@ class _TessMemberResultCallback_3_2 : public TessResultCallback2<R,A1,A2> {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _TessMemberResultCallback_3_2( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3)
@@ -4108,9 +4110,9 @@ class _TessMemberResultCallback_3_2<del, void, T, P1, P2, P3, A1, A2> : public T
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _TessMemberResultCallback_3_2( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3)
@@ -4153,9 +4155,9 @@ class _TessFunctionResultCallback_3_2 : public TessResultCallback2<R,A1,A2> {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _TessFunctionResultCallback_3_2(FunctionSignature function, P1 p1, P2 p2, P3 p3)
@@ -4183,9 +4185,9 @@ class _TessFunctionResultCallback_3_2<del, void, P1, P2, P3, A1, A2> : public Te
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _TessFunctionResultCallback_3_2(FunctionSignature function, P1 p1, P2 p2, P3 p3)
@@ -4224,10 +4226,10 @@ class _ConstTessMemberResultCallback_4_2 : public TessResultCallback2<R,A1,A2> {
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _ConstTessMemberResultCallback_4_2(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -4257,10 +4259,10 @@ class _ConstTessMemberResultCallback_4_2<del, void, T, P1, P2, P3, P4, A1, A2> :
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _ConstTessMemberResultCallback_4_2(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -4304,10 +4306,10 @@ class _TessMemberResultCallback_4_2 : public TessResultCallback2<R,A1,A2> {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _TessMemberResultCallback_4_2( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -4337,10 +4339,10 @@ class _TessMemberResultCallback_4_2<del, void, T, P1, P2, P3, P4, A1, A2> : publ
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _TessMemberResultCallback_4_2( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -4383,10 +4385,10 @@ class _TessFunctionResultCallback_4_2 : public TessResultCallback2<R,A1,A2> {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _TessFunctionResultCallback_4_2(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -4414,10 +4416,10 @@ class _TessFunctionResultCallback_4_2<del, void, P1, P2, P3, P4, A1, A2> : publi
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _TessFunctionResultCallback_4_2(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -4456,11 +4458,11 @@ class _ConstTessMemberResultCallback_5_2 : public TessResultCallback2<R,A1,A2> {
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _ConstTessMemberResultCallback_5_2(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -4490,11 +4492,11 @@ class _ConstTessMemberResultCallback_5_2<del, void, T, P1, P2, P3, P4, P5, A1, A
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _ConstTessMemberResultCallback_5_2(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -4538,11 +4540,11 @@ class _TessMemberResultCallback_5_2 : public TessResultCallback2<R,A1,A2> {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _TessMemberResultCallback_5_2( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -4572,11 +4574,11 @@ class _TessMemberResultCallback_5_2<del, void, T, P1, P2, P3, P4, P5, A1, A2> : 
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _TessMemberResultCallback_5_2( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -4619,11 +4621,11 @@ class _TessFunctionResultCallback_5_2 : public TessResultCallback2<R,A1,A2> {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _TessFunctionResultCallback_5_2(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -4651,11 +4653,11 @@ class _TessFunctionResultCallback_5_2<del, void, P1, P2, P3, P4, P5, A1, A2> : p
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _TessFunctionResultCallback_5_2(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -4694,12 +4696,12 @@ class _ConstTessMemberResultCallback_6_2 : public TessResultCallback2<R,A1,A2> {
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _ConstTessMemberResultCallback_6_2(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -4729,12 +4731,12 @@ class _ConstTessMemberResultCallback_6_2<del, void, T, P1, P2, P3, P4, P5, P6, A
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _ConstTessMemberResultCallback_6_2(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -4778,12 +4780,12 @@ class _TessMemberResultCallback_6_2 : public TessResultCallback2<R,A1,A2> {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _TessMemberResultCallback_6_2( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -4813,12 +4815,12 @@ class _TessMemberResultCallback_6_2<del, void, T, P1, P2, P3, P4, P5, P6, A1, A2
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _TessMemberResultCallback_6_2( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -4861,12 +4863,12 @@ class _TessFunctionResultCallback_6_2 : public TessResultCallback2<R,A1,A2> {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _TessFunctionResultCallback_6_2(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -4894,12 +4896,12 @@ class _TessFunctionResultCallback_6_2<del, void, P1, P2, P3, P4, P5, P6, A1, A2>
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _TessFunctionResultCallback_6_2(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -5170,7 +5172,7 @@ class _ConstTessMemberResultCallback_1_3
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _ConstTessMemberResultCallback_1_3(T* object,
@@ -5201,7 +5203,7 @@ class _ConstTessMemberResultCallback_1_3<del, void, T, P1, A1, A2, A3>
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _ConstTessMemberResultCallback_1_3(T* object,
@@ -5245,7 +5247,7 @@ class _TessMemberResultCallback_1_3 : public TessResultCallback3<R,A1,A2,A3> {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _TessMemberResultCallback_1_3(T* object,
@@ -5276,7 +5278,7 @@ class _TessMemberResultCallback_1_3<del, void, T, P1, A1, A2, A3>
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _TessMemberResultCallback_1_3(T* object,
@@ -5319,7 +5321,7 @@ class _TessFunctionResultCallback_1_3 : public TessCallback3<A1,A2,A3> {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _TessFunctionResultCallback_1_3(FunctionSignature function, P1 p1)
@@ -5348,7 +5350,7 @@ class _TessFunctionResultCallback_1_3<del, void, P1, A1, A2, A3>
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _TessFunctionResultCallback_1_3(FunctionSignature function, P1 p1)
@@ -5387,8 +5389,8 @@ class _ConstTessMemberResultCallback_2_3 : public TessResultCallback3<R,A1,A2,A3
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _ConstTessMemberResultCallback_2_3(const T* object, MemberSignature member, P1 p1, P2 p2)
@@ -5418,8 +5420,8 @@ class _ConstTessMemberResultCallback_2_3<del, void, T, P1, P2, A1, A2, A3> : pub
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _ConstTessMemberResultCallback_2_3(const T* object, MemberSignature member, P1 p1, P2 p2)
@@ -5463,8 +5465,8 @@ class _TessMemberResultCallback_2_3 : public TessResultCallback3<R,A1,A2,A3> {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _TessMemberResultCallback_2_3( T* object, MemberSignature member, P1 p1, P2 p2)
@@ -5495,8 +5497,8 @@ class _TessMemberResultCallback_2_3<del, void, T, P1, P2, A1, A2, A3> : public T
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _TessMemberResultCallback_2_3( T* object, MemberSignature member, P1 p1, P2 p2)
@@ -5539,8 +5541,8 @@ class _TessFunctionResultCallback_2_3 : public TessResultCallback3<R,A1,A2,A3> {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _TessFunctionResultCallback_2_3(FunctionSignature function, P1 p1, P2 p2)
@@ -5568,8 +5570,8 @@ class _TessFunctionResultCallback_2_3<del, void, P1, P2, A1, A2, A3> : public Te
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _TessFunctionResultCallback_2_3(FunctionSignature function, P1 p1, P2 p2)
@@ -5608,9 +5610,9 @@ class _ConstTessMemberResultCallback_3_3 : public TessResultCallback3<R,A1,A2,A3
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _ConstTessMemberResultCallback_3_3(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3)
@@ -5640,9 +5642,9 @@ class _ConstTessMemberResultCallback_3_3<del, void, T, P1, P2, P3, A1, A2, A3> :
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _ConstTessMemberResultCallback_3_3(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3)
@@ -5686,9 +5688,9 @@ class _TessMemberResultCallback_3_3 : public TessResultCallback3<R,A1,A2,A3> {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _TessMemberResultCallback_3_3( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3)
@@ -5718,9 +5720,9 @@ class _TessMemberResultCallback_3_3<del, void, T, P1, P2, P3, A1, A2, A3> : publ
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _TessMemberResultCallback_3_3( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3)
@@ -5763,9 +5765,9 @@ class _TessFunctionResultCallback_3_3 : public TessResultCallback3<R,A1,A2,A3> {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _TessFunctionResultCallback_3_3(FunctionSignature function, P1 p1, P2 p2, P3 p3)
@@ -5793,9 +5795,9 @@ class _TessFunctionResultCallback_3_3<del, void, P1, P2, P3, A1, A2, A3> : publi
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _TessFunctionResultCallback_3_3(FunctionSignature function, P1 p1, P2 p2, P3 p3)
@@ -5834,10 +5836,10 @@ class _ConstTessMemberResultCallback_4_3 : public TessResultCallback3<R,A1,A2,A3
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _ConstTessMemberResultCallback_4_3(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -5867,10 +5869,10 @@ class _ConstTessMemberResultCallback_4_3<del, void, T, P1, P2, P3, P4, A1, A2, A
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _ConstTessMemberResultCallback_4_3(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -5914,10 +5916,10 @@ class _TessMemberResultCallback_4_3 : public TessResultCallback3<R,A1,A2,A3> {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _TessMemberResultCallback_4_3( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -5947,10 +5949,10 @@ class _TessMemberResultCallback_4_3<del, void, T, P1, P2, P3, P4, A1, A2, A3> : 
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _TessMemberResultCallback_4_3( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -5993,10 +5995,10 @@ class _TessFunctionResultCallback_4_3 : public TessResultCallback3<R,A1,A2,A3> {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _TessFunctionResultCallback_4_3(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -6024,10 +6026,10 @@ class _TessFunctionResultCallback_4_3<del, void, P1, P2, P3, P4, A1, A2, A3> : p
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _TessFunctionResultCallback_4_3(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -6066,11 +6068,11 @@ class _ConstTessMemberResultCallback_5_3 : public TessResultCallback3<R,A1,A2,A3
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _ConstTessMemberResultCallback_5_3(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -6100,11 +6102,11 @@ class _ConstTessMemberResultCallback_5_3<del, void, T, P1, P2, P3, P4, P5, A1, A
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _ConstTessMemberResultCallback_5_3(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -6148,11 +6150,11 @@ class _TessMemberResultCallback_5_3 : public TessResultCallback3<R,A1,A2,A3> {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _TessMemberResultCallback_5_3( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -6182,11 +6184,11 @@ class _TessMemberResultCallback_5_3<del, void, T, P1, P2, P3, P4, P5, A1, A2, A3
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _TessMemberResultCallback_5_3( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -6229,11 +6231,11 @@ class _TessFunctionResultCallback_5_3 : public TessResultCallback3<R,A1,A2,A3> {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _TessFunctionResultCallback_5_3(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -6261,11 +6263,11 @@ class _TessFunctionResultCallback_5_3<del, void, P1, P2, P3, P4, P5, A1, A2, A3>
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _TessFunctionResultCallback_5_3(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -6304,12 +6306,12 @@ class _ConstTessMemberResultCallback_6_3 : public TessResultCallback3<R,A1,A2,A3
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _ConstTessMemberResultCallback_6_3(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -6339,12 +6341,12 @@ class _ConstTessMemberResultCallback_6_3<del, void, T, P1, P2, P3, P4, P5, P6, A
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _ConstTessMemberResultCallback_6_3(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -6388,12 +6390,12 @@ class _TessMemberResultCallback_6_3 : public TessResultCallback3<R,A1,A2,A3> {
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _TessMemberResultCallback_6_3( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -6423,12 +6425,12 @@ class _TessMemberResultCallback_6_3<del, void, T, P1, P2, P3, P4, P5, P6, A1, A2
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _TessMemberResultCallback_6_3( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -6471,12 +6473,12 @@ class _TessFunctionResultCallback_6_3 : public TessResultCallback3<R,A1,A2,A3> {
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _TessFunctionResultCallback_6_3(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -6504,12 +6506,12 @@ class _TessFunctionResultCallback_6_3<del, void, P1, P2, P3, P4, P5, P6, A1, A2,
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _TessFunctionResultCallback_6_3(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -6756,7 +6758,7 @@ class _ConstTessMemberResultCallback_1_4 : public TessResultCallback4<R,A1,A2,A3
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _ConstTessMemberResultCallback_1_4(const T* object, MemberSignature member, P1 p1)
@@ -6786,7 +6788,7 @@ class _ConstTessMemberResultCallback_1_4<del, void, T, P1, A1, A2, A3, A4> : pub
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _ConstTessMemberResultCallback_1_4(const T* object, MemberSignature member, P1 p1)
@@ -6830,7 +6832,7 @@ class _TessMemberResultCallback_1_4 : public TessResultCallback4<R,A1,A2,A3,A4> 
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _TessMemberResultCallback_1_4( T* object, MemberSignature member, P1 p1)
@@ -6860,7 +6862,7 @@ class _TessMemberResultCallback_1_4<del, void, T, P1, A1, A2, A3, A4> : public T
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _TessMemberResultCallback_1_4( T* object, MemberSignature member, P1 p1)
@@ -6903,7 +6905,7 @@ class _TessFunctionResultCallback_1_4 : public TessResultCallback4<R,A1,A2,A3,A4
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _TessFunctionResultCallback_1_4(FunctionSignature function, P1 p1)
@@ -6931,7 +6933,7 @@ class _TessFunctionResultCallback_1_4<del, void, P1, A1, A2, A3, A4> : public Te
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _TessFunctionResultCallback_1_4(FunctionSignature function, P1 p1)
@@ -6970,8 +6972,8 @@ class _ConstTessMemberResultCallback_2_4 : public TessResultCallback4<R,A1,A2,A3
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _ConstTessMemberResultCallback_2_4(const T* object, MemberSignature member, P1 p1, P2 p2)
@@ -7001,8 +7003,8 @@ class _ConstTessMemberResultCallback_2_4<del, void, T, P1, P2, A1, A2, A3, A4> :
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _ConstTessMemberResultCallback_2_4(const T* object, MemberSignature member, P1 p1, P2 p2)
@@ -7046,8 +7048,8 @@ class _TessMemberResultCallback_2_4 : public TessResultCallback4<R,A1,A2,A3,A4> 
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _TessMemberResultCallback_2_4( T* object, MemberSignature member, P1 p1, P2 p2)
@@ -7077,8 +7079,8 @@ class _TessMemberResultCallback_2_4<del, void, T, P1, P2, A1, A2, A3, A4> : publ
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _TessMemberResultCallback_2_4( T* object, MemberSignature member, P1 p1, P2 p2)
@@ -7121,8 +7123,8 @@ class _TessFunctionResultCallback_2_4 : public TessResultCallback4<R,A1,A2,A3,A4
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _TessFunctionResultCallback_2_4(FunctionSignature function, P1 p1, P2 p2)
@@ -7150,8 +7152,8 @@ class _TessFunctionResultCallback_2_4<del, void, P1, P2, A1, A2, A3, A4> : publi
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _TessFunctionResultCallback_2_4(FunctionSignature function, P1 p1, P2 p2)
@@ -7190,9 +7192,9 @@ class _ConstTessMemberResultCallback_3_4 : public TessResultCallback4<R,A1,A2,A3
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _ConstTessMemberResultCallback_3_4(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3)
@@ -7222,9 +7224,9 @@ class _ConstTessMemberResultCallback_3_4<del, void, T, P1, P2, P3, A1, A2, A3, A
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _ConstTessMemberResultCallback_3_4(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3)
@@ -7268,9 +7270,9 @@ class _TessMemberResultCallback_3_4 : public TessResultCallback4<R,A1,A2,A3,A4> 
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _TessMemberResultCallback_3_4( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3)
@@ -7300,9 +7302,9 @@ class _TessMemberResultCallback_3_4<del, void, T, P1, P2, P3, A1, A2, A3, A4> : 
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _TessMemberResultCallback_3_4( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3)
@@ -7345,9 +7347,9 @@ class _TessFunctionResultCallback_3_4 : public TessResultCallback4<R,A1,A2,A3,A4
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _TessFunctionResultCallback_3_4(FunctionSignature function, P1 p1, P2 p2, P3 p3)
@@ -7375,9 +7377,9 @@ class _TessFunctionResultCallback_3_4<del, void, P1, P2, P3, A1, A2, A3, A4> : p
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _TessFunctionResultCallback_3_4(FunctionSignature function, P1 p1, P2 p2, P3 p3)
@@ -7416,10 +7418,10 @@ class _ConstTessMemberResultCallback_4_4 : public TessResultCallback4<R,A1,A2,A3
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _ConstTessMemberResultCallback_4_4(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -7449,10 +7451,10 @@ class _ConstTessMemberResultCallback_4_4<del, void, T, P1, P2, P3, P4, A1, A2, A
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _ConstTessMemberResultCallback_4_4(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -7496,10 +7498,10 @@ class _TessMemberResultCallback_4_4 : public TessResultCallback4<R,A1,A2,A3,A4> 
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _TessMemberResultCallback_4_4( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -7529,10 +7531,10 @@ class _TessMemberResultCallback_4_4<del, void, T, P1, P2, P3, P4, A1, A2, A3, A4
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _TessMemberResultCallback_4_4( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -7575,10 +7577,10 @@ class _TessFunctionResultCallback_4_4 : public TessResultCallback4<R,A1,A2,A3,A4
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _TessFunctionResultCallback_4_4(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -7606,10 +7608,10 @@ class _TessFunctionResultCallback_4_4<del, void, P1, P2, P3, P4, A1, A2, A3, A4>
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _TessFunctionResultCallback_4_4(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -7648,11 +7650,11 @@ class _ConstTessMemberResultCallback_5_4 : public TessResultCallback4<R,A1,A2,A3
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _ConstTessMemberResultCallback_5_4(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -7682,11 +7684,11 @@ class _ConstTessMemberResultCallback_5_4<del, void, T, P1, P2, P3, P4, P5, A1, A
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _ConstTessMemberResultCallback_5_4(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -7730,11 +7732,11 @@ class _TessMemberResultCallback_5_4 : public TessResultCallback4<R,A1,A2,A3,A4> 
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _TessMemberResultCallback_5_4( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -7764,11 +7766,11 @@ class _TessMemberResultCallback_5_4<del, void, T, P1, P2, P3, P4, P5, A1, A2, A3
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _TessMemberResultCallback_5_4( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -7811,11 +7813,11 @@ class _TessFunctionResultCallback_5_4 : public TessResultCallback4<R,A1,A2,A3,A4
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _TessFunctionResultCallback_5_4(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -7843,11 +7845,11 @@ class _TessFunctionResultCallback_5_4<del, void, P1, P2, P3, P4, P5, A1, A2, A3,
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _TessFunctionResultCallback_5_4(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -7886,12 +7888,12 @@ class _ConstTessMemberResultCallback_6_4 : public TessResultCallback4<R,A1,A2,A3
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _ConstTessMemberResultCallback_6_4(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -7921,12 +7923,12 @@ class _ConstTessMemberResultCallback_6_4<del, void, T, P1, P2, P3, P4, P5, P6, A
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _ConstTessMemberResultCallback_6_4(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -7970,12 +7972,12 @@ class _TessMemberResultCallback_6_4 : public TessResultCallback4<R,A1,A2,A3,A4> 
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _TessMemberResultCallback_6_4( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -8005,12 +8007,12 @@ class _TessMemberResultCallback_6_4<del, void, T, P1, P2, P3, P4, P5, P6, A1, A2
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _TessMemberResultCallback_6_4( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -8053,12 +8055,12 @@ class _TessFunctionResultCallback_6_4 : public TessResultCallback4<R,A1,A2,A3,A4
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _TessFunctionResultCallback_6_4(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -8086,12 +8088,12 @@ class _TessFunctionResultCallback_6_4<del, void, P1, P2, P3, P4, P5, P6, A1, A2,
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _TessFunctionResultCallback_6_4(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -8352,7 +8354,7 @@ class _ConstTessMemberResultCallback_1_5 : public TessResultCallback5<R,A1,A2,A3
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _ConstTessMemberResultCallback_1_5(const T* object, MemberSignature member, P1 p1)
@@ -8382,7 +8384,7 @@ class _ConstTessMemberResultCallback_1_5<del, void, T, P1, A1, A2, A3, A4, A5> :
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _ConstTessMemberResultCallback_1_5(const T* object, MemberSignature member, P1 p1)
@@ -8426,7 +8428,7 @@ class _TessMemberResultCallback_1_5 : public TessResultCallback5<R,A1,A2,A3,A4,A
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _TessMemberResultCallback_1_5( T* object, MemberSignature member, P1 p1)
@@ -8456,7 +8458,7 @@ class _TessMemberResultCallback_1_5<del, void, T, P1, A1, A2, A3, A4, A5> : publ
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _TessMemberResultCallback_1_5( T* object, MemberSignature member, P1 p1)
@@ -8499,7 +8501,7 @@ class _TessFunctionResultCallback_1_5 : public TessResultCallback5<R,A1,A2,A3,A4
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _TessFunctionResultCallback_1_5(FunctionSignature function, P1 p1)
@@ -8527,7 +8529,7 @@ class _TessFunctionResultCallback_1_5<del, void, P1, A1, A2, A3, A4, A5> : publi
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
+  typename std::remove_reference<P1>::type p1_;
 
  public:
   inline _TessFunctionResultCallback_1_5(FunctionSignature function, P1 p1)
@@ -8566,8 +8568,8 @@ class _ConstTessMemberResultCallback_2_5 : public TessResultCallback5<R,A1,A2,A3
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _ConstTessMemberResultCallback_2_5(const T* object, MemberSignature member, P1 p1, P2 p2)
@@ -8597,8 +8599,8 @@ class _ConstTessMemberResultCallback_2_5<del, void, T, P1, P2, A1, A2, A3, A4, A
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _ConstTessMemberResultCallback_2_5(const T* object, MemberSignature member, P1 p1, P2 p2)
@@ -8642,8 +8644,8 @@ class _TessMemberResultCallback_2_5 : public TessResultCallback5<R,A1,A2,A3,A4,A
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _TessMemberResultCallback_2_5( T* object, MemberSignature member, P1 p1, P2 p2)
@@ -8673,8 +8675,8 @@ class _TessMemberResultCallback_2_5<del, void, T, P1, P2, A1, A2, A3, A4, A5> : 
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _TessMemberResultCallback_2_5( T* object, MemberSignature member, P1 p1, P2 p2)
@@ -8717,8 +8719,8 @@ class _TessFunctionResultCallback_2_5 : public TessResultCallback5<R,A1,A2,A3,A4
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _TessFunctionResultCallback_2_5(FunctionSignature function, P1 p1, P2 p2)
@@ -8746,8 +8748,8 @@ class _TessFunctionResultCallback_2_5<del, void, P1, P2, A1, A2, A3, A4, A5> : p
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
 
  public:
   inline _TessFunctionResultCallback_2_5(FunctionSignature function, P1 p1, P2 p2)
@@ -8786,9 +8788,9 @@ class _ConstTessMemberResultCallback_3_5 : public TessResultCallback5<R,A1,A2,A3
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _ConstTessMemberResultCallback_3_5(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3)
@@ -8818,9 +8820,9 @@ class _ConstTessMemberResultCallback_3_5<del, void, T, P1, P2, P3, A1, A2, A3, A
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _ConstTessMemberResultCallback_3_5(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3)
@@ -8864,9 +8866,9 @@ class _TessMemberResultCallback_3_5 : public TessResultCallback5<R,A1,A2,A3,A4,A
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _TessMemberResultCallback_3_5( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3)
@@ -8896,9 +8898,9 @@ class _TessMemberResultCallback_3_5<del, void, T, P1, P2, P3, A1, A2, A3, A4, A5
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _TessMemberResultCallback_3_5( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3)
@@ -8941,9 +8943,9 @@ class _TessFunctionResultCallback_3_5 : public TessResultCallback5<R,A1,A2,A3,A4
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _TessFunctionResultCallback_3_5(FunctionSignature function, P1 p1, P2 p2, P3 p3)
@@ -8971,9 +8973,9 @@ class _TessFunctionResultCallback_3_5<del, void, P1, P2, P3, A1, A2, A3, A4, A5>
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
 
  public:
   inline _TessFunctionResultCallback_3_5(FunctionSignature function, P1 p1, P2 p2, P3 p3)
@@ -9012,10 +9014,10 @@ class _ConstTessMemberResultCallback_4_5 : public TessResultCallback5<R,A1,A2,A3
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _ConstTessMemberResultCallback_4_5(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -9045,10 +9047,10 @@ class _ConstTessMemberResultCallback_4_5<del, void, T, P1, P2, P3, P4, A1, A2, A
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _ConstTessMemberResultCallback_4_5(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -9092,10 +9094,10 @@ class _TessMemberResultCallback_4_5 : public TessResultCallback5<R,A1,A2,A3,A4,A
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _TessMemberResultCallback_4_5( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -9125,10 +9127,10 @@ class _TessMemberResultCallback_4_5<del, void, T, P1, P2, P3, P4, A1, A2, A3, A4
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _TessMemberResultCallback_4_5( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -9171,10 +9173,10 @@ class _TessFunctionResultCallback_4_5 : public TessResultCallback5<R,A1,A2,A3,A4
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _TessFunctionResultCallback_4_5(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -9202,10 +9204,10 @@ class _TessFunctionResultCallback_4_5<del, void, P1, P2, P3, P4, A1, A2, A3, A4,
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
 
  public:
   inline _TessFunctionResultCallback_4_5(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4)
@@ -9244,11 +9246,11 @@ class _ConstTessMemberResultCallback_5_5 : public TessResultCallback5<R,A1,A2,A3
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _ConstTessMemberResultCallback_5_5(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -9279,11 +9281,11 @@ class _ConstTessMemberResultCallback_5_5<del, void, T, P1, P2, P3, P4, P5, A1, A
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _ConstTessMemberResultCallback_5_5(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -9327,11 +9329,11 @@ class _TessMemberResultCallback_5_5 : public TessResultCallback5<R,A1,A2,A3,A4,A
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _TessMemberResultCallback_5_5( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -9361,11 +9363,11 @@ class _TessMemberResultCallback_5_5<del, void, T, P1, P2, P3, P4, P5, A1, A2, A3
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _TessMemberResultCallback_5_5( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -9408,11 +9410,11 @@ class _TessFunctionResultCallback_5_5 : public TessResultCallback5<R,A1,A2,A3,A4
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _TessFunctionResultCallback_5_5(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -9440,11 +9442,11 @@ class _TessFunctionResultCallback_5_5<del, void, P1, P2, P3, P4, P5, A1, A2, A3,
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
 
  public:
   inline _TessFunctionResultCallback_5_5(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
@@ -9483,12 +9485,12 @@ class _ConstTessMemberResultCallback_6_5 : public TessResultCallback5<R,A1,A2,A3
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _ConstTessMemberResultCallback_6_5(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -9518,12 +9520,12 @@ class _ConstTessMemberResultCallback_6_5<del, void, T, P1, P2, P3, P4, P5, P6, A
  private:
   const T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _ConstTessMemberResultCallback_6_5(const T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -9567,12 +9569,12 @@ class _TessMemberResultCallback_6_5 : public TessResultCallback5<R,A1,A2,A3,A4,A
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _TessMemberResultCallback_6_5( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -9602,12 +9604,12 @@ class _TessMemberResultCallback_6_5<del, void, T, P1, P2, P3, P4, P5, P6, A1, A2
  private:
    T* object_;
   MemberSignature member_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _TessMemberResultCallback_6_5( T* object, MemberSignature member, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -9650,12 +9652,12 @@ class _TessFunctionResultCallback_6_5 : public TessResultCallback5<R,A1,A2,A3,A4
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _TessFunctionResultCallback_6_5(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
@@ -9683,12 +9685,12 @@ class _TessFunctionResultCallback_6_5<del, void, P1, P2, P3, P4, P5, P6, A1, A2,
 
  private:
   FunctionSignature function_;
-  typename remove_reference<P1>::type p1_;
-  typename remove_reference<P2>::type p2_;
-  typename remove_reference<P3>::type p3_;
-  typename remove_reference<P4>::type p4_;
-  typename remove_reference<P5>::type p5_;
-  typename remove_reference<P6>::type p6_;
+  typename std::remove_reference<P1>::type p1_;
+  typename std::remove_reference<P2>::type p2_;
+  typename std::remove_reference<P3>::type p3_;
+  typename std::remove_reference<P4>::type p4_;
+  typename std::remove_reference<P5>::type p5_;
+  typename std::remove_reference<P6>::type p6_;
 
  public:
   inline _TessFunctionResultCallback_6_5(FunctionSignature function, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
